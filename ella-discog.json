@@ -1,0 +1,68 @@
+{
+  // declare namespaces
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "tl": "http://purl.org/NET/c4dm/timeline.owl#",
+    "event": "http://purl.org/NET/c4dm/event.owl#",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "owl": "http://www.w3.org/2002/07/owl#"
+  },
+
+  // begin description of event
+  "@id": "http://linkedjazz.org/resource/session0001",
+  "@type": "event:Event",
+  "owl:sameAs": "http://data.carnegiehall.org/events/CH_19490917_1200AM",
+  "owl:sameAs": "http://jdisc.columbia.edu/session/charlie-parker-september-17-18-1949",
+  "rdf:label": "Jazz at the Philharmonic"@en,
+
+  // first subevent, performance of "Flying Home"
+  "event:sub_event": {
+    "@id": "http://linkedjazz.org/resource/session0001a",
+    "@type": "mo:Performance",
+    "owl:sameAs": "_:CH_19490917_1200AM_item_5",
+    "mo:performance_of": {
+      "@id": "http://linkedjazz.org/resource/Flying_Home",
+      "@type": "mo:MusicalWork",
+      "owl:sameAs": "http://musicbrainz.org/work/c237a769-5c3d-4037-86ac-7ede8c911dda",
+      "owl:sameAs": "http://dbpedia.org/page/Flying_Home",
+      "owl:sameAs": "http://jdisc.columbia.edu/song/flying-home",
+      "dc:title": "Flying Home"
+    },
+
+    // using mo:singer instead of mo:performer allows us to bypass the extra step we use below for instrumentalists
+    "mo:singer": "http:linkedjazz.org/resource/Ella_Fitzgerald",
+
+    // we break each individual performer into his/her own subevent including ID, player, and instrument
+    "event:sub_event": {
+      "@id": "http://linkedjazz.org/resource/session0001a1",
+      "mo:performer": "http://linkedjazz.org/resource/Roy_Eldridge",
+      "mo:instrument": "http://dbpedia.org/resource/Trumpet"
+    },
+    "event:sub_event": {
+      "@id": "http://linkedjazz.org/resource/session0001a2",
+      "mo:performer": "http://linkedjazz.org/resource/Charlie_Parker",
+      "mo:instrument": "http://dbpedia.org/resource/Alto_saxophone"
+    },
+    "event:sub_event": {
+      "etc..."
+    },
+
+    // this says that the performance of Flying Home we're describing was captured as a signal...
+    "mo:recorded_as": {
+      "@id": "http://linkedjazz.org/resource/session0001/signalA",
+      "@type": "mo:Signal",
+
+      // ...which was in turn published as a track
+      "mo:published_as": {
+        "@id": "http://linkedjazz.org/resource/Jazz_at_the_Philharmonic_1949/Flying_Home",
+        "@type": "mo:Track",
+        "owl:sameAs": "http://musicbrainz.org/recording/57d136e5-fc09-4266-92cc-afb574402ae5",
+      }
+    }
+  }
+}
+
+// then we need to relate the Signal to a SignalGroup and the Track to a Record... not sure how to do this just yet, because the MO would do <SignalGroup> <signal> <Signal>, and <Record> <track> <Track>, but we have the inverse above... we'd need <Signal> <part_of> <SignalGroup> and <Track> <part_of> <Record>
