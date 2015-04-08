@@ -7,7 +7,8 @@
     "event": "http://purl.org/NET/c4dm/event.owl#",
     "foaf": "http://xmlns.com/foaf/0.1/",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-    "owl": "http://www.w3.org/2002/07/owl#"
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "@language": "en"
   },
 
   "_comment": "begin description of event",
@@ -15,7 +16,18 @@
   "@type": "event:Event",
   "owl:sameAs": "http://data.carnegiehall.org/events/CH_19490917_1200AM",
   "owl:sameAs": "http://jdisc.columbia.edu/session/charlie-parker-september-17-18-1949",
-  "rdf:label": "Jazz at the Philharmonic"@en,
+  "rdf:label": "Jazz at the Philharmonic",
+  "event:place": "http://sws.geonames.org/5111573/",
+  "event:time": {
+    "tl:start": {
+      "@value": "1949-09-17T12:00:00-04:00",
+      "@type": "xsd:dateTime"
+    },
+    "tl:end": {
+      "@value": "",
+      "@type": "xsd:dateTime"
+    }
+  },
 
   "_comment": "first subevent, performance of 'Flying Home'",
   "event:sub_event": {
